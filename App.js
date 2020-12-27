@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import MainScreen from "./Screens/MainScreen";
 import CalculationScreen from "./Screens/CalculationScreen";
+import {Button} from 'react-native'
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,13 @@ function App() {
             headerTintColor: "#fff",
             route: { route },
             navigation: { navigation },
+            headerRight: () => (
+            <Button
+              onPress={() => calculate()}
+              title="Calculate"
+              color="#007aff"
+            />
+          )
           })}
           name="Calculation"
           component={CalculationScreen}

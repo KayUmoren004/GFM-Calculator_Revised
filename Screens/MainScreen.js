@@ -70,23 +70,26 @@ export default class MainScreen extends React.Component {
               value={this.state.numberSelected}
               returnKeyLabel="Done"
               returnKeyType="done"
-              onSubmitEditing={Keyboard.dismiss}
+              onSubmitEditing={() => saveUserInput()}
             />
-            <TouchableOpacity onPress={() => saveUserInput()}>
-              <Icon
-                style={{
-                  paddingHorizontal: 20,
-                  paddingVertical: 10,
-                  borderWidth: 1,
-                  borderRadius: 76 / 3,
+            <TouchableOpacity
+              onPress={() => saveUserInput()}
+              style={{
+                //width: 100,
+                //height: 100,
+                borderRadius: 100 / 2,
+                borderColor: "#fff",
+                borderWidth: 1,
+                paddingHorizontal: 20,
+                paddingVertical: 10,
 
-                  marginTop: 10,
-                  //height: 50,
-                  //width: "70%",
-                  paddingHorizontal: 16,
-                  borderColor: "#fff",
-                  fontWeight: "600",
-                }}
+                marginTop: 10,
+
+                paddingHorizontal: 16,
+              }}
+            >
+              <Icon
+                style={{}}
                 name="arrow-right-thick"
                 color="#fff"
                 size={25}
@@ -138,7 +141,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(52, 52, 52, 0.8)",
 
     marginTop: 10,
-    //height: 50,
+    //height: 80,
     //width: "70%",
     paddingHorizontal: 16,
     color: "#fff",

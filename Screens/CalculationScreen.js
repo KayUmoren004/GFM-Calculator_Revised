@@ -10,8 +10,8 @@ class CalculationScreen extends Component {
 
   render() {
     return (
-      <View>
-        <Text> CalculationScreen </Text>
+      <View style = {{backgroundColor:"#000", flex:1, justifyContent:"center", alignItems:'center'}}>
+        <Text style = {{color:"#fff"}}> CalculationScreen </Text>
       </View>
     );
   }

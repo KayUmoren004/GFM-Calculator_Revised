@@ -12,7 +12,6 @@ import {
   Alert,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import { navigateToCalculate } from "../Components/functions";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 export default class MainScreen extends React.Component {

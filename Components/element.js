@@ -1,6 +1,6 @@
 const elements = [
     { Id: 2, Name: "Actinium", Value: "227.03" },
-    { Id: 3, Name: " Aluminium", Value: "26.98" },
+    { Id: 3, Name: "Aluminium", Value: "26.98" },
     { Id: 4, Name: "Americium", Value: "243" },
     { Id: 5, Name: "Antimony", Value: "121.75" },
     { Id: 6, Name: "Argon", Value: "39.95" },

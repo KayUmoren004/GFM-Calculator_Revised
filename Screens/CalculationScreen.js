@@ -11,13 +11,12 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
-  Modal
+  Modal,
 } from "react-native";
 import elements from "../Components/element";
 import { Divider } from "react-native-paper";
 import PickerModal from "react-native-picker-modal-view";
 import { Switch, TouchableOpacity } from "react-native-gesture-handler";
-import CalculateModal from '../Modal/CalculateModal' 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 class CalculationScreen extends Component {
@@ -36,27 +35,81 @@ class CalculationScreen extends Component {
       thirdSelectedElement: {},
       fourthSelectedElement: {},
       fifthSelectedElement: {},
-      showModal:false,
+      showModal: false,
     };
   }
 
   componentDidMount() {
     this.props.navigation.setOptions({
       headerRight: () => (
-        <Button
-          onPress={this.calculate}
-          title="Calculate"
-          color="#007aff"
-        />
-      )
-    })
+        <Button onPress={this.calculate} title="Calculate" color="#007aff" />
+      ),
+    });
   }
 
   calculate = () => {
     this.setState({
-      showModal: true
-    })
-  }
+      showModal: true,
+    });
+
+    let firstSelectedElementValue = this.state.firstSelectedElement.Value;
+    let secondSelectedElementValue = this.state.secondSelectedElement.Value;
+    let thirdSelectedElementValue = this.state.thirdSelectedElement.Value;
+    let fourthSelectedElementValue = this.state.fourthSelectedElement.Value;
+    let fifthSelectedElementValue = this.state.fifthSelectedElement.Value;
+    let firstMoleNumber = this.state.firstMoleValue;
+    let secondMoleNumber = this.state.secondMoleValue;
+    let thirdMoleNumber = this.state.thirdMoleValue;
+    let fourthMoleNumber = this.state.fourthMoleValue;
+    let fifthMoleNumber = this.state.fifthMoleValue;
+
+    switch (this.state.elementsNumber) {
+      case "2":
+        const answerForTwoElements =
+          firstSelectedElementValue * firstMoleNumber +
+          secondSelectedElementValue * secondMoleNumber;
+        this.setState({
+          answer: answerForTwoElements,
+        });
+        break;
+
+      case "3":
+        const answerForThreeElements =
+          firstSelectedElementValue * firstMoleNumber +
+          secondSelectedElementValue * secondMoleNumber +
+          thirdSelectedElementValue * thirdMoleNumber;
+        this.setState({
+          answer: answerForThreeElements,
+        });
+        break;
+
+      case "4":
+        const answerForFourElements =
+          firstSelectedElementValue * firstMoleNumber +
+          secondSelectedElementValue * secondMoleNumber +
+          thirdSelectedElementValue * thirdMoleNumber +
+          fourthSelectedElementValue * fourthMoleNumber;
+        this.setState({
+          answer: answerForFourElements,
+        });
+        break;
+
+      case "5":
+        const answerForFiveElements =
+          firstSelectedElementValue * firstMoleNumber +
+          secondSelectedElementValue * secondMoleNumber +
+          thirdSelectedElementValue * thirdMoleNumber +
+          fourthSelectedElementValue * fourthMoleNumber +
+          fifthSelectedElementValue * fifthMoleNumber;
+        this.setState({
+          answer: answerForFiveElements,
+        });
+        break;
+
+      default:
+        break;
+    }
+  };
 
   firstSelected = (selected) => {
     this.setState({
@@ -163,9 +216,9 @@ class CalculationScreen extends Component {
                   placeholder="Enter the number of moles..."
                   placeholderTextColor="#A8A8A8"
                   onChangeText={(text) =>
-                    this.setState({ numberSelected: text })
+                    this.setState({ firstMoleValue: text })
                   }
-                  value={this.state.numberSelected}
+                  value={this.state.firstMoleValue}
                   returnKeyLabel="Done"
                   returnKeyType="done"
                   onSubmitEditing={Keyboard.dismiss}
@@ -240,9 +293,9 @@ class CalculationScreen extends Component {
                   placeholder="Enter the number of moles..."
                   placeholderTextColor="#A8A8A8"
                   onChangeText={(text) =>
-                    this.setState({ numberSelected: text })
+                    this.setState({ secondMoleValue: text })
                   }
-                  value={this.state.numberSelected}
+                  value={this.state.secondMoleValue}
                   returnKeyLabel="Done"
                   returnKeyType="done"
                   onSubmitEditing={Keyboard.dismiss}
@@ -331,9 +384,9 @@ class CalculationScreen extends Component {
                   placeholder="Enter the number of moles..."
                   placeholderTextColor="#A8A8A8"
                   onChangeText={(text) =>
-                    this.setState({ numberSelected: text })
+                    this.setState({ firstMoleValue: text })
                   }
-                  value={this.state.numberSelected}
+                  value={this.state.firstMoleValue}
                   returnKeyLabel="Done"
                   returnKeyType="done"
                   onSubmitEditing={Keyboard.dismiss}
@@ -408,9 +461,9 @@ class CalculationScreen extends Component {
                   placeholder="Enter the number of moles..."
                   placeholderTextColor="#A8A8A8"
                   onChangeText={(text) =>
-                    this.setState({ numberSelected: text })
+                    this.setState({ secondMoleValue: text })
                   }
-                  value={this.state.numberSelected}
+                  value={this.state.secondMoleValue}
                   returnKeyLabel="Done"
                   returnKeyType="done"
                   onSubmitEditing={Keyboard.dismiss}
@@ -456,20 +509,22 @@ class CalculationScreen extends Component {
                       </Text>
                     </TouchableOpacity>
                   )}
-                  onSelected={(selected3) => this.thirdSelectedElement(selected3)}
+                  onSelected={(selected3) =>
+                    this.thirdSelectedElement(selected3)
+                  }
                   onRequestClosed={() => console.warn("closed...")}
                   onBackRequest={() => console.warn("back key pressed")}
                   items={elements}
                   sortingLanguage={"tr"}
-              showToTopButton={true}
-              selected={this.state.thirdSelectedElement}
-              showAlphabeticalIndex={true}
-              autoGenerateAlphabeticalIndex={true}
-              selectPlaceholderText={"Choose one..."}
-              onEndReached={() => console.log("list ended...")}
-              searchPlaceholderText={"Search..."}
-              requireSelection={false}
-              autoSort={false}
+                  showToTopButton={true}
+                  selected={this.state.thirdSelectedElement}
+                  showAlphabeticalIndex={true}
+                  autoGenerateAlphabeticalIndex={true}
+                  selectPlaceholderText={"Choose one..."}
+                  onEndReached={() => console.log("list ended...")}
+                  searchPlaceholderText={"Search..."}
+                  requireSelection={false}
+                  autoSort={false}
                 />
               </View>
               <View style={styles._MolesSelect}>
@@ -483,9 +538,9 @@ class CalculationScreen extends Component {
                   placeholder="Enter the number of moles..."
                   placeholderTextColor="#A8A8A8"
                   onChangeText={(text) =>
-                    this.setState({ numberSelected: text })
+                    this.setState({ thirdMoleValue: text })
                   }
-                  value={this.state.numberSelected}
+                  value={this.state.thirdMoleValue}
                   returnKeyLabel="Done"
                   returnKeyType="done"
                   onSubmitEditing={Keyboard.dismiss}
@@ -574,9 +629,9 @@ class CalculationScreen extends Component {
                   placeholder="Enter the number of moles..."
                   placeholderTextColor="#A8A8A8"
                   onChangeText={(text) =>
-                    this.setState({ numberSelected: text })
+                    this.setState({ firstMoleValue: text })
                   }
-                  value={this.state.numberSelected}
+                  value={this.state.firstMoleValue}
                   returnKeyLabel="Done"
                   returnKeyType="done"
                   onSubmitEditing={Keyboard.dismiss}
@@ -651,9 +706,9 @@ class CalculationScreen extends Component {
                   placeholder="Enter the number of moles..."
                   placeholderTextColor="#A8A8A8"
                   onChangeText={(text) =>
-                    this.setState({ numberSelected: text })
+                    this.setState({ secondMoleValue: text })
                   }
-                  value={this.state.numberSelected}
+                  value={this.state.secondMoleValue}
                   returnKeyLabel="Done"
                   returnKeyType="done"
                   onSubmitEditing={Keyboard.dismiss}
@@ -699,20 +754,22 @@ class CalculationScreen extends Component {
                       </Text>
                     </TouchableOpacity>
                   )}
-                  onSelected={(selected3) => this.thirdSelectedElement(selected3)}
+                  onSelected={(selected3) =>
+                    this.thirdSelectedElement(selected3)
+                  }
                   onRequestClosed={() => console.warn("closed...")}
                   onBackRequest={() => console.warn("back key pressed")}
                   items={elements}
                   sortingLanguage={"tr"}
-              showToTopButton={true}
-              selected={this.state.thirdSelectedElement}
-              showAlphabeticalIndex={true}
-              autoGenerateAlphabeticalIndex={true}
-              selectPlaceholderText={"Choose one..."}
-              onEndReached={() => console.log("list ended...")}
-              searchPlaceholderText={"Search..."}
-              requireSelection={false}
-              autoSort={false}
+                  showToTopButton={true}
+                  selected={this.state.thirdSelectedElement}
+                  showAlphabeticalIndex={true}
+                  autoGenerateAlphabeticalIndex={true}
+                  selectPlaceholderText={"Choose one..."}
+                  onEndReached={() => console.log("list ended...")}
+                  searchPlaceholderText={"Search..."}
+                  requireSelection={false}
+                  autoSort={false}
                 />
               </View>
               <View style={styles._MolesSelect}>
@@ -726,9 +783,9 @@ class CalculationScreen extends Component {
                   placeholder="Enter the number of moles..."
                   placeholderTextColor="#A8A8A8"
                   onChangeText={(text) =>
-                    this.setState({ numberSelected: text })
+                    this.setState({ thirdMoleValue: text })
                   }
-                  value={this.state.numberSelected}
+                  value={this.state.thirdMoleValue}
                   returnKeyLabel="Done"
                   returnKeyType="done"
                   onSubmitEditing={Keyboard.dismiss}
@@ -774,20 +831,22 @@ class CalculationScreen extends Component {
                       </Text>
                     </TouchableOpacity>
                   )}
-                  onSelected={(selected4) => this.fourthSelectedElement(selected4)}
+                  onSelected={(selected4) =>
+                    this.fourthSelectedElement(selected4)
+                  }
                   onRequestClosed={() => console.warn("closed...")}
                   onBackRequest={() => console.warn("back key pressed")}
                   items={elements}
                   sortingLanguage={"tr"}
-              showToTopButton={true}
-              selected={this.state.fourthSelectedElement}
-              showAlphabeticalIndex={true}
-              autoGenerateAlphabeticalIndex={true}
-              selectPlaceholderText={"Choose one..."}
-              onEndReached={() => console.log("list ended...")}
-              searchPlaceholderText={"Search..."}
-              requireSelection={false}
-              autoSort={false}
+                  showToTopButton={true}
+                  selected={this.state.fourthSelectedElement}
+                  showAlphabeticalIndex={true}
+                  autoGenerateAlphabeticalIndex={true}
+                  selectPlaceholderText={"Choose one..."}
+                  onEndReached={() => console.log("list ended...")}
+                  searchPlaceholderText={"Search..."}
+                  requireSelection={false}
+                  autoSort={false}
                 />
               </View>
               <View style={styles._MolesSelect}>
@@ -801,9 +860,9 @@ class CalculationScreen extends Component {
                   placeholder="Enter the number of moles..."
                   placeholderTextColor="#A8A8A8"
                   onChangeText={(text) =>
-                    this.setState({ numberSelected: text })
+                    this.setState({ fourthMoleValue: text })
                   }
-                  value={this.state.numberSelected}
+                  value={this.state.fourthMoleValue}
                   returnKeyLabel="Done"
                   returnKeyType="done"
                   onSubmitEditing={Keyboard.dismiss}
@@ -893,9 +952,9 @@ class CalculationScreen extends Component {
                   placeholder="Enter the number of moles..."
                   placeholderTextColor="#A8A8A8"
                   onChangeText={(text) =>
-                    this.setState({ numberSelected: text })
+                    this.setState({ firstMoleValue: text })
                   }
-                  value={this.state.numberSelected}
+                  value={this.state.firstMoleValue}
                   returnKeyLabel="Done"
                   returnKeyType="done"
                   onSubmitEditing={Keyboard.dismiss}
@@ -970,9 +1029,9 @@ class CalculationScreen extends Component {
                   placeholder="Enter the number of moles..."
                   placeholderTextColor="#A8A8A8"
                   onChangeText={(text) =>
-                    this.setState({ numberSelected: text })
+                    this.setState({ secondMoleValue: text })
                   }
-                  value={this.state.numberSelected}
+                  value={this.state.secondMoleValue}
                   returnKeyLabel="Done"
                   returnKeyType="done"
                   onSubmitEditing={Keyboard.dismiss}
@@ -1018,20 +1077,22 @@ class CalculationScreen extends Component {
                       </Text>
                     </TouchableOpacity>
                   )}
-                  onSelected={(selected3) => this.thirdSelectedElement(selected3)}
+                  onSelected={(selected3) =>
+                    this.thirdSelectedElement(selected3)
+                  }
                   onRequestClosed={() => console.warn("closed...")}
                   onBackRequest={() => console.warn("back key pressed")}
                   items={elements}
                   sortingLanguage={"tr"}
-              showToTopButton={true}
-              selected={this.state.thirdSelectedElement}
-              showAlphabeticalIndex={true}
-              autoGenerateAlphabeticalIndex={true}
-              selectPlaceholderText={"Choose one..."}
-              onEndReached={() => console.log("list ended...")}
-              searchPlaceholderText={"Search..."}
-              requireSelection={false}
-              autoSort={false}
+                  showToTopButton={true}
+                  selected={this.state.thirdSelectedElement}
+                  showAlphabeticalIndex={true}
+                  autoGenerateAlphabeticalIndex={true}
+                  selectPlaceholderText={"Choose one..."}
+                  onEndReached={() => console.log("list ended...")}
+                  searchPlaceholderText={"Search..."}
+                  requireSelection={false}
+                  autoSort={false}
                 />
               </View>
               <View style={styles._MolesSelect}>
@@ -1045,9 +1106,9 @@ class CalculationScreen extends Component {
                   placeholder="Enter the number of moles..."
                   placeholderTextColor="#A8A8A8"
                   onChangeText={(text) =>
-                    this.setState({ numberSelected: text })
+                    this.setState({ thirdMoleValue: text })
                   }
-                  value={this.state.numberSelected}
+                  value={this.state.thirdMoleValue}
                   returnKeyLabel="Done"
                   returnKeyType="done"
                   onSubmitEditing={Keyboard.dismiss}
@@ -1093,20 +1154,22 @@ class CalculationScreen extends Component {
                       </Text>
                     </TouchableOpacity>
                   )}
-                  onSelected={(selected4) => this.fourthSelectedElement(selected4)}
+                  onSelected={(selected4) =>
+                    this.fourthSelectedElement(selected4)
+                  }
                   onRequestClosed={() => console.warn("closed...")}
                   onBackRequest={() => console.warn("back key pressed")}
                   items={elements}
                   sortingLanguage={"tr"}
-              showToTopButton={true}
-              selected={this.state.fourthSelectedElement}
-              showAlphabeticalIndex={true}
-              autoGenerateAlphabeticalIndex={true}
-              selectPlaceholderText={"Choose one..."}
-              onEndReached={() => console.log("list ended...")}
-              searchPlaceholderText={"Search..."}
-              requireSelection={false}
-              autoSort={false}
+                  showToTopButton={true}
+                  selected={this.state.fourthSelectedElement}
+                  showAlphabeticalIndex={true}
+                  autoGenerateAlphabeticalIndex={true}
+                  selectPlaceholderText={"Choose one..."}
+                  onEndReached={() => console.log("list ended...")}
+                  searchPlaceholderText={"Search..."}
+                  requireSelection={false}
+                  autoSort={false}
                 />
               </View>
               <View style={styles._MolesSelect}>
@@ -1120,9 +1183,9 @@ class CalculationScreen extends Component {
                   placeholder="Enter the number of moles..."
                   placeholderTextColor="#A8A8A8"
                   onChangeText={(text) =>
-                    this.setState({ numberSelected: text })
+                    this.setState({ fourthMoleValue: text })
                   }
-                  value={this.state.numberSelected}
+                  value={this.state.fourthMoleValue}
                   returnKeyLabel="Done"
                   returnKeyType="done"
                   onSubmitEditing={Keyboard.dismiss}
@@ -1168,20 +1231,22 @@ class CalculationScreen extends Component {
                       </Text>
                     </TouchableOpacity>
                   )}
-                  onSelected={(selected5) => this.fifthSelectedElement(selected5)}
+                  onSelected={(selected5) =>
+                    this.fifthSelectedElement(selected5)
+                  }
                   onRequestClosed={() => console.warn("closed...")}
                   onBackRequest={() => console.warn("back key pressed")}
                   items={elements}
                   sortingLanguage={"tr"}
-              showToTopButton={true}
-              selected={this.state.fifthSelectedElement}
-              showAlphabeticalIndex={true}
-              autoGenerateAlphabeticalIndex={true}
-              selectPlaceholderText={"Choose one..."}
-              onEndReached={() => console.log("list ended...")}
-              searchPlaceholderText={"Search..."}
-              requireSelection={false}
-              autoSort={false}
+                  showToTopButton={true}
+                  selected={this.state.fifthSelectedElement}
+                  showAlphabeticalIndex={true}
+                  autoGenerateAlphabeticalIndex={true}
+                  selectPlaceholderText={"Choose one..."}
+                  onEndReached={() => console.log("list ended...")}
+                  searchPlaceholderText={"Search..."}
+                  requireSelection={false}
+                  autoSort={false}
                 />
               </View>
               <View style={styles._MolesSelect}>
@@ -1195,9 +1260,9 @@ class CalculationScreen extends Component {
                   placeholder="Enter the number of moles..."
                   placeholderTextColor="#A8A8A8"
                   onChangeText={(text) =>
-                    this.setState({ numberSelected: text })
+                    this.setState({ fifthMoleValue: text })
                   }
-                  value={this.state.numberSelected}
+                  value={this.state.fifthMoleValue}
                   returnKeyLabel="Done"
                   returnKeyType="done"
                   onSubmitEditing={Keyboard.dismiss}
@@ -1230,6 +1295,37 @@ class CalculationScreen extends Component {
     }
   };
 
+  _renderCalculationModal = () => {
+    return (
+      <View>
+        <View style={styles.Calculate_Container}>
+          <Text style={styles._text}>
+            Your answer is:{" "}
+            <Text
+              style={{
+                color: "#007aff",
+                fontSize: 20,
+                fontWeight: "bold",
+                fontStyle: "italic",
+              }}
+            >
+              {this.state.answer} g/mol
+            </Text>
+          </Text>
+        </View>
+
+        <Button
+          title="Close"
+          onPress={() => {
+            this.setState({
+              showModal: !true,
+            });
+          }}
+        />
+      </View>
+    );
+  };
+
   render() {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -1257,23 +1353,18 @@ class CalculationScreen extends Component {
             >
               <View style={{ flex: 1, backgroundColor: "#000" }}>
                 {this._renderViews()}
-                  <Modal
-                    animationType={"slide"}
-                    transparent={false}
-                    visible={this.state.showModal}
-                    onRequestClose={() => {
-                      console.info("Modal has been closed")
-                    }}>
-                      <View style={styles._modal}>
-                          <Button
-                            title="Close Modal"
-                            onPress={() => {
-                              this.setState({
-      showModal: !true
-    })
-                            }}/>
-                      </View>
-                    </Modal>
+                <Modal
+                  animationType={"slide"}
+                  transparent={false}
+                  visible={this.state.showModal}
+                  onRequestClose={() => {
+                    console.log("Modal has been closed");
+                  }}
+                >
+                  <View style={styles._modal}>
+                    {this._renderCalculationModal()}
+                  </View>
+                </Modal>
               </View>
             </ScrollView>
           </KeyboardAwareScrollView>
@@ -1333,12 +1424,12 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "600",
   },
-  _modal:{
+  _modal: {
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#000',
+    alignItems: "center",
+    backgroundColor: "#000",
     padding: 100,
-  }
+  },
 });
 
 export default CalculationScreen;

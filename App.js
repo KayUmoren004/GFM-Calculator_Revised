@@ -15,7 +15,7 @@ function App() {
       <Stack.Navigator>
         <Stack.Screen
           options={({ route, navigation }) => ({
-            headerStyle: { backgroundColor: "#000" },
+            headerStyle: { backgroundColor: "#000", shadowColor: 'transparent' },
             headerTintColor: "#fff",
             route: { route },
             navigation: { navigation },
@@ -25,7 +25,7 @@ function App() {
         />
         <Stack.Screen
           options={({ route, navigation }) => ({
-            headerStyle: { backgroundColor: "#000" },
+            headerStyle: { backgroundColor: "#000", shadowColor: 'transparent' },
             headerTintColor: "#fff",
             route: { route },
             navigation: { navigation },

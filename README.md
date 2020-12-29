@@ -5,5 +5,5 @@
 
 You'll usually be asked to give the gram formula mass for 1 mole of a substance.</p>
 
-<h1>How it works?</h1>
+<h1>> How it works</h1>
 <p>My application uses the user's input of how man elements are in their GFM problem, then using the formula <b>Gram Formula Mass = mass solute / formula mass of solute</b>, the application solves for the GFM ranging from <b>2 to 5</b> elements</p>
